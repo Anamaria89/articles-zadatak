@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/articles/resources/views/layouts/main.blade.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/ArticlesController.php</file>
+            <file>file:/C:/articles/resources/views/articles/create.blade.php</file>
+            <file>file:/C:/articles/resources/views/users/login.blade.php</file>
+            <file>file:/C:/articles/resources/views/home.blade.php</file>
+            <file>file:/C:/articles/routes/api.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/IndexController.php</file>
+            <file>file:/C:/articles/app/Http/Resources/User.php</file>
+            <file>file:/C:/articles/database/migrations/2019_04_15_130624_alter_articles_table.php</file>
+            <file>file:/C:/articles/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/C:/articles/.env</file>
+            <file>file:/C:/articles/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/articles/resources/views/articles/index.blade.php</file>
+            <file>file:/C:/articles/resources/views/articles/edit.blade.php</file>
+            <file>file:/C:/articles/routes/web.php</file>
+            <file>file:/C:/articles/database/seeds/UsersTableSeeder.php</file>
+            <file>file:/C:/articles/database/migrations/2019_04_15_115004_create_articles_table.php</file>
+            <file>file:/C:/articles/resources/views/auth/login.blade.php</file>
+            <file>file:/C:/articles/app/User.php</file>
+            <file>file:/C:/articles/app/Providers/AppServiceProvider.php</file>
+            <file>file:/C:/articles/app/Http/Middleware/Authenticate.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/api/ArticlesController.php</file>
+            <file>file:/C:/articles/app/Http/Resources/Article.php</file>
+            <file>file:/C:/articles/resources/views/index/index.blade.php</file>
+            <file>file:/C:/articles/app/Article.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/articles/app/Http/Resources/ArticleCollection.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/UsersController.php</file>
+            <file>file:/C:/articles/app/Http/Kernel.php</file>
+            <file>file:/C:/articles/app/Http/Resources/UserCollection.php</file>
+            <file>file:/C:/articles/app/Http/Controllers/Controller.php</file>
+        </group>
+    </open-files>
+</project-private>
