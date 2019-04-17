@@ -14,12 +14,12 @@ class ArticlesController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(){
+    public function index(Article $article){
         
         $rows = Article::where('deleted', 0)->get();
       
         
-        return view('articles.index', compact('rows'));
+        return view('articles.index', compact('rows', 'article'));
     
     }
     
@@ -150,5 +150,18 @@ class ArticlesController extends Controller
          return redirect()->route('articles.index');
         
         
+    }
+     public function delete(Article $article){
+        
+        // hard delete
+        //$user->delete();
+        
+        // soft delete
+        $article->deleted = 1;
+        $article->deleted_by = auth()->user()->id;
+        $article->deleted_at = now();
+        $article->save();
+        
+        return redirect()->route('articles.index');
     }
 }
