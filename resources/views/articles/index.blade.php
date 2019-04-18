@@ -23,12 +23,26 @@
     <div class="card-body">
         <div id="messages-success"></div>
         <div class="table-responsive">
+            <div class="col-md-4">
+                  <form action="{{ route('articles.index')}}" method="POST" role="search">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search"
+                            placeholder="Search User Articles"> <span class="input-group-btn">
+                            <button type="submit" class="btn btn-info">
+                                Search
+                            </button>
+                        </span>
+                    </div>
+                </form> 
+            </div>
+         
+            <br>
             <table class="table table-bordered" id="rows" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Title</th>
                         <th>User</th>
-                        <th>Image</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -42,9 +56,6 @@
 
                         <td class="">
                             {{ $value->user->name }}
-                        </td>
-                        <td class="" >
-                            <img src="{{ $value->image }}" style="width:100px;"/> 
                         </td>
                         <td class="article text-center text-white">
                             <a data-placement="top" title='Edit page' href='{{ route("articles.edit", ["article" => $value->id]) }}' class="btn btn-sm btn-primary tooltip-custom">Edit</a>

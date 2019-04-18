@@ -2,27 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Facades\Input;
+use Request;
+use App\User;
+use Illuminate\Support\Facades\DB;
 class ArticlesController extends Controller
 {
      public function __construct()
     {
         $this->middleware('auth');
     }
-    public function index(Article $article){
+    
+    public function index(Request $request, Article $article){
         
-        $rows = Article::where('deleted', 0)->get();
+         if(request()->isMethod('get')){
+             
+             $rows = Article::where('deleted', 0)->get();
+             
+           return view('articles.index', compact('rows', 'article'));
+         }
+         
+         if(request()->isMethod('post')){
+              $search = Input::get('search');
+        
+            $rows = Article::whereHas('user', function($query) use($search) {
+                $query->where('name', 'like', '%'.$search.'%');
+            })->get();
+           return view('articles.index', compact('rows', 'article'));
+         }
+    }
+    public function search(Request $request, Article $article){
+          $search = Input::get('search');
+        
+    $rows = Article::query()->where('user_id', 'LIKE', '%'.$search.'%') ->get();
       
         
-        return view('articles.index', compact('rows', 'article'));
-    
+    return view('articles.index',compact('rows', 'article'));
     }
-    
     public function create()
     {
 
@@ -131,26 +151,18 @@ class ArticlesController extends Controller
         $row->save();
         
       
-      
-        
-//        $row->title = request()->title;
-//        $row->content = request()->content;
-//           $html = '
-//                
-//                    <div class="card-body messages-success">
-//                        Successfully added article!!!
-//                    </div>
-//              
-//            ';
-                
-        
-       // $article->save();
-        //return $html;
+ 
     
          return redirect()->route('articles.index');
         
         
     }
+    
+    public function show(Article $article)
+    {
+        return view('articles.show',compact('article'));
+    }
+    
     public function delete(Article $article, Request $request) {
         
       if($request->ajax()) {
