@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Input;
-use Request;
+//use Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 class ArticlesController extends Controller
@@ -21,7 +21,7 @@ class ArticlesController extends Controller
         
          if(request()->isMethod('get')){
              
-             $rows = Article::where('deleted', 0)->get();
+             $rows = Article::paginate(5);
              
            return view('articles.index', compact('rows', 'article'));
          }
@@ -92,10 +92,10 @@ class ArticlesController extends Controller
 //                    </div>
 //              
 //            ';
-                
+              
         
        // $row->save();
-        //return $html;
+        
     
          return redirect()->route('articles.index');
         }
@@ -150,9 +150,6 @@ class ArticlesController extends Controller
         
         $row->save();
         
-      
- 
-    
          return redirect()->route('articles.index');
         
         
@@ -163,38 +160,19 @@ class ArticlesController extends Controller
         return view('articles.show',compact('article'));
     }
     
-    public function delete(Article $article, Request $request) {
+        public function delete(Article $article, Request $request) {
         
       if($request->ajax()) {
             if($article->delete()) {
-                  return 'delete success';
+                  return 'success';
             } else {
-                  return 'delete failed';
+                  return 'failed';
             }
         }
-//           $article->delete();
+             //$article->delete();
 //           
 //           return response()->json();
 //
-}
-  
-//    return response()->json([
-//        'success' => 'Record deleted successfully!'
-//    ]);
-        // hard delete
-        //$user->delete();
-//         if ( $request->ajax() ) {
-//        $article->delete( $request->all() );
-//
-//        return response(['msg' => 'Product deleted', 'status' => 'success']);
-//    }
-//    return response(['msg' => 'Failed deleting the product', 'status' => 'failed']);
-        // soft delete
-//        $article->deleted = 1;
-//        $article->deleted_by = auth()->user()->id;
-//        $article->deleted_at = now();
-//        $article->save();
-//        
-//        return redirect()->route('articles.index');
-    
+}       
+
 }

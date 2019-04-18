@@ -49,7 +49,7 @@
                 <tbody id="">
                     @if(count($rows) > 0)
                     @foreach($rows as $value)
-                    <tr class="article" data-id="{{ $value->id }}">
+                    <tr class="article">
                         <td class="">
                             {{ $value->title }}
                         </td>
@@ -61,11 +61,12 @@
                             <a data-placement="top" title='Edit page' href='{{ route("articles.edit", ["article" => $value->id]) }}' class="btn btn-sm btn-primary tooltip-custom">Edit</a>
                             <a data-placement="top" title='Preview page' href="{{ route('articles.show', ['article'=> $value->id, 'slug' => Str::slug($value->title, '-') ]) }}" class="btn btn-sm btn-success">Preview</i></a>
                             
-                           <a	href="{{ route("articles.delete", ["article" => $value->id]) }}" 
+                         <a href="" 
 								data-token="{{ csrf_token() }}"
-								data-id="{{ $article->id }}" 
+								data-id="{{ $value->id }}" 
 								class="delete-post-link btn btn-sm btn-danger"
 								>Delete </a>
+                        
                         
                         </td>
                     </tr>
@@ -75,7 +76,8 @@
             </table>
 
         </div>
-    </div>
+        <div>{{ $rows->links() }}</div>
+            </div>
 
 
     @endsection
@@ -88,26 +90,10 @@
 
 $('.delete-post-link').on('click', function(e) {
   		e.preventDefault();
-      var parentArticle = $(this).closest('tr');
-  		$.ajax({
-  			method	: 'delete',
-        url   : $(this).attr('href'),
-  			data	: {
-  				_token	: $(this).data('token')
-  			},
-  			success	: function(data) {
-  				if(data === 'delete success') {
-            // location.reload();
-            parentArticle.slideUp();
-            $('#messages-success').html('<div>Article created!</div>');
-          } else {
-            alert("Could not delete data");
-          }
-  			},
-        error: function (error) {
-          console.log(error);
-        }
-  		});
-  	});
+                var parentPost = $(this).closest('tr');
+                parentPost.slideUp();
+                $('#messages-success').html('Article successfully deleted!!!');
+  }); 
+ 
     </script>
     @endsection

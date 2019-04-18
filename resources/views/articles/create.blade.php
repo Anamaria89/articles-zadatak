@@ -25,9 +25,8 @@
 <div class="container">
     <h3 class="col-md-6 offset-md-3 text-center pb-4 pt-3">Add Your Quote!</h3>
     <div class="col-md-6 offset-md-3 pl-0">
-        <div id="ajaxResponse" class="">
-            
-        </div>
+        <div id="messages-success"></div>
+        
         <form id="createForm" action="{{ route('articles.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             
@@ -91,7 +90,7 @@ $(document).ready(function() {
             },
             dataType: 'JSON',
             success: function(data) {
-                 $("#ajaxResponse").append("<div>"+data.msg+"</div>");
+                 $('#messages-success').html('Article successfully added!!!');
                 
             },
             error: function(data) {

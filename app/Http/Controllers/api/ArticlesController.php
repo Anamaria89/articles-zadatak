@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use Request;
 
 class ArticlesController extends Controller
 {
@@ -124,35 +124,22 @@ class ArticlesController extends Controller
           ];
         return Response::json($response);
         
-//        $row->title = request()->title;
-//        $row->content = request()->content;
-//           $html = '
-//                
-//                    <div class="card-body messages-success">
-//                        Successfully added article!!!
-//                    </div>
-//              
-//            ';
-                
-        
-       // $article->save();
-        //return $html;
-    
-        // return redirect()->route('articles.index');
-        
         
      }
-     public function delete(Article $article, Request $request) {
+     
+      public function delete(Article $article, Request $request) {
         
-       if($request->ajax()) {
+      if($request->ajax()) {
             if($article->delete()) {
-                  return 'deleted';
+                  return 'success';
             } else {
-                  return 'not deleted';
+                  return 'failed';
             }
         }
 //           $article->delete();
 //           
 //           return response()->json();
 //
-}
+     }     
+     
+ }
