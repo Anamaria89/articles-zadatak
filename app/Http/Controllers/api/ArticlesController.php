@@ -142,4 +142,17 @@ class ArticlesController extends Controller
         
         
      }
+     public function delete(Article $article, Request $request) {
+        
+       if($request->ajax()) {
+            if($article->delete()) {
+                  return 'deleted';
+            } else {
+                  return 'not deleted';
+            }
+        }
+//           $article->delete();
+//           
+//           return response()->json();
+//
 }

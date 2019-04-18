@@ -151,17 +151,38 @@ class ArticlesController extends Controller
         
         
     }
-     public function delete(Article $article){
+    public function delete(Article $article, Request $request) {
         
+      if($request->ajax()) {
+            if($article->delete()) {
+                  return 'delete success';
+            } else {
+                  return 'delete failed';
+            }
+        }
+//           $article->delete();
+//           
+//           return response()->json();
+//
+}
+  
+//    return response()->json([
+//        'success' => 'Record deleted successfully!'
+//    ]);
         // hard delete
         //$user->delete();
-        
+//         if ( $request->ajax() ) {
+//        $article->delete( $request->all() );
+//
+//        return response(['msg' => 'Product deleted', 'status' => 'success']);
+//    }
+//    return response(['msg' => 'Failed deleting the product', 'status' => 'failed']);
         // soft delete
-        $article->deleted = 1;
-        $article->deleted_by = auth()->user()->id;
-        $article->deleted_at = now();
-        $article->save();
-        
-        return redirect()->route('articles.index');
-    }
+//        $article->deleted = 1;
+//        $article->deleted_by = auth()->user()->id;
+//        $article->deleted_at = now();
+//        $article->save();
+//        
+//        return redirect()->route('articles.index');
+    
 }
