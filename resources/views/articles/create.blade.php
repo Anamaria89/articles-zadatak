@@ -6,16 +6,12 @@
 
 @section('custom-css')
 <!-- Custom styles for this page -->
+
 <style>
-.ck-editor__editable {
-    min-height: 200px;
-}
-</style>
-<style>
-  .messages-success {
+  #messages-success {
       color: darkred;
-      border-left: 2px solid darkred;
       margin-bottom: 10px;
+      font-size: 20px;
   }  
 </style>
 
@@ -25,8 +21,8 @@
 <div class="container">
     <h3 class="col-md-6 offset-md-3 text-center pb-4 pt-3">Add Your Quote!</h3>
     <div class="col-md-6 offset-md-3 pl-0">
-        <div id="messages-success"></div>
-        
+         <div id="messages-success"></div>
+      
         <form id="createForm" action="{{ route('articles.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             
@@ -69,36 +65,39 @@
 
 <!-- Custom styles for this page -->
 
-<script>
+<script type="text/javascript">
    
+    
 $(document).ready(function() {
-    $("#save").click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    $('#save').on('click', function(e){
+        e.preventDefault();
         $.ajax({
-            type: 'POST',
-            url: '{{ route('articles.store') }}',
+            url: "{{ route('articles.store') }}",
+            type: 'post',
             data: {
-              
-                title: $('form [name=title]').val(),
-                image: $('form [name=image]').val(),
-                content: $('form [name=content]').val(),
-               
-            },
-            dataType: 'JSON',
-            success: function(data) {
-                 $('#messages-success').html('Article successfully added!!!');
+                
+                'title': $('form [name=title]').val(),
+                'image': $('form [name=image]').val(),
+                'content': $('form [name=content]').val(),
+                '_token' : $('form [name=_token]').val()
                 
             },
-            error: function(data) {
-                 alert('Data not sent');
-               
+            dataType: 'text'
+        }).done(function(data){
+           //alert('Data sent');
+            $('#messages-success').text('Article successfully created!!!');
+              $('form [name=title]').val(''),
+                 $('form [name=image]').val(''),
+                 $('form [name=content]').val('')
+        }).fail(function(jqXHR, error, message){
+//            alert(message);
+           alert('Data not sent');
+        }).always(function(){
+            
         });
     });
 });
+
 </script>
 @endsection
 

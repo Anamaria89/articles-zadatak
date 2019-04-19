@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Request;
+use App\Http\Controllers\Controller;
 
 class ArticlesController extends Controller
 {
      public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('api.auth');
     }
     public function index(){
         
@@ -29,6 +29,7 @@ class ArticlesController extends Controller
     
     public function store()
     {
+        
          $data = request()->validate([
            
             'title' => 'required|string|max:191',
@@ -61,9 +62,28 @@ class ArticlesController extends Controller
             'content' => $data['content'],
             'image' => $data['image']
         ]);
-         return response()
-            ->json($data);
-          
+        
+        
+       $message = [
+           'type' => 'success',
+            'message' => 'Uspesno obrisan artikal'
+       ];
+        
+        if(request()->ajax()) {
+            if( Auth::user()->articles()->create( [
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'image' => $data['image']
+        ])){
+              
+       $message = [
+           'type' => 'success',
+            'message' => 'Uspesno obrisan artikal'
+       ];    
+            }
+        } 
+        return response()->json($message);
+         
 //        return response()->json(['success'=>'Data is successfully added']);
          //return redirect()->route('articles.index');
         }
@@ -127,15 +147,27 @@ class ArticlesController extends Controller
         
      }
      
-      public function delete(Article $article, Request $request) {
+       public function delete(Article $article) {
+        $data = [
+            'type' => 'error',
+            'message' => ''
+        ];
         
-      if($request->ajax()) {
+      if(request()->ajax()) {
             if($article->delete()) {
-                  return 'success';
+                  $data = [
+                      'type' => 'success',
+                      'message' => 'Article deleted successfully!'
+                  ];
             } else {
-                  return 'failed';
+                  $data = [
+                      'type' => 'error',
+                      'message' => 'There was an error'
+                  ];
             }
         }
+        
+        return response()->json($data);
 //           $article->delete();
 //           
 //           return response()->json();

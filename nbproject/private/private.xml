@@ -7,8 +7,6 @@
             <file>file:/C:/articles/app/Http/Controllers/ArticlesController.php</file>
             <file>file:/C:/articles/resources/views/articles/create.blade.php</file>
             <file>file:/C:/articles/resources/views/articles/index.blade.php</file>
-            <file>file:/C:/articles/routes/api.php</file>
-            <file>file:/C:/articles/resources/views/articles/edit.blade.php</file>
             <file>file:/C:/articles/app/Http/Controllers/api/ArticlesController.php</file>
         </group>
     </open-files>

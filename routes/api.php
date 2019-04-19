@@ -29,4 +29,7 @@ Route::get('/articles', function () {
             return new ArticleCollection(Article::all());
 });
 
+Route::get('/article/{article}/delete', 'api\ArticlesController@delete')->name('api.article.delete');
+
+
 //Route::get('/articles', 'ArticlesController@index')->name('articles.index');

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 //use Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+
 class ArticlesController extends Controller
 {
      public function __construct()
@@ -81,24 +82,17 @@ class ArticlesController extends Controller
         Auth::user()->articles()->create([
             'title' => $data['title'],
             'content' => $data['content'],
-            'image' => $data['image']
+            'image' => $data['image'],
+            'message' => 'Data created'
         ]);
-//        $row->title = request()->title;
-//        $row->content = request()->content;
-//           $html = '
-//                
-//                    <div class="card-body messages-success">
-//                        Successfully added article!!!
-//                    </div>
-//              
-//            ';
-              
         
-       // $row->save();
         
+        
+        
+        return response()->json();
     
-         return redirect()->route('articles.index');
-        }
+    
+         }
         
    public function user(User $user)
     {
@@ -150,7 +144,7 @@ class ArticlesController extends Controller
         
         $row->save();
         
-         return redirect()->route('articles.index');
+          return response()->json();
         
         
     }
@@ -159,20 +153,32 @@ class ArticlesController extends Controller
     {
         return view('articles.show',compact('article'));
     }
-    
-        public function delete(Article $article, Request $request) {
+ 
+     public function delete(Article $article) {
+        $data = [
+            'type' => 'error',
+            'message' => ''
+        ];
         
-      if($request->ajax()) {
+      if(request()->ajax()) {
             if($article->delete()) {
-                  return 'success';
+                  $data = [
+                      'type' => 'success',
+                      'message' => 'Article deleted successfully!'
+                  ];
             } else {
-                  return 'failed';
+                  $data = [
+                      'type' => 'error',
+                      'message' => 'There was an error'
+                  ];
             }
         }
-             //$article->delete();
+        
+        return response()->json($data);
+//           $article->delete();
 //           
 //           return response()->json();
 //
-}       
+     }     
 
 }
