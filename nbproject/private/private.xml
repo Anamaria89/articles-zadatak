@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/articles/routes/web.php</file>
             <file>file:/C:/articles/app/Http/Controllers/ArticlesController.php</file>
+            <file>file:/C:/articles/resources/views/layouts/main.blade.php</file>
             <file>file:/C:/articles/resources/views/articles/create.blade.php</file>
             <file>file:/C:/articles/resources/views/articles/index.blade.php</file>
+            <file>file:/C:/articles/resources/views/articles/edit.blade.php</file>
             <file>file:/C:/articles/app/Http/Controllers/api/ArticlesController.php</file>
+            <file>file:/C:/articles/resources/views/index/index.blade.php</file>
         </group>
     </open-files>
 </project-private>

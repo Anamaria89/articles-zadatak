@@ -20,7 +20,7 @@
 @section('content')
 <div class="container">
     <h1 class="title col-md-4 offset-4">All Articles</h1>
-    <div class="card-body">
+    <div class="data-wrapper" id="indexData">
         <div id="messages-success"></div>
         <div class="table-responsive">
             <div class="col-md-4">
@@ -62,7 +62,7 @@
                             <a data-placement="top" title='Preview page' href="{{ route('articles.show', ['article'=> $value->id, 'slug' => Str::slug($value->title, '-') ]) }}" class="btn btn-sm btn-success">Preview</i></a>
 
 
-                            <button data-toggle="modal" data-target="#Mymodal" type="button" data-url="{{ route('api.article.delete', ['article' => $value->id]) }}" data-id="{{$value->id}}" data-title="{{$value->title}}" class="btn btn-sm btn-danger">Delete</button>
+                            <button data-toggle="modal" data-target="#Mymodal" type="button" data-url="{{ route('api.articles.delete', ['article' => $value->id]) }}" data-id="{{$value->id}}" data-title="{{$value->title}}" class="btn btn-sm btn-danger">Delete</button>
                           
                             
                             

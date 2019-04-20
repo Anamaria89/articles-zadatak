@@ -71,69 +71,7 @@
 
 <script type="text/javascript">
    
-    
-$(document).ready(function() {
-    $('#save').on('click', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "{{ route('articles.store', ['article' => $article->id]) }}",
-            type: 'post',
-            data: {
-                
-                'title': $('form [name=title]').val(),
-                'image': $('form [name=image]').val(),
-                'content': $('form [name=content]').val(),
-                '_token' : $('form [name=_token]').val()
-                
-            },
-            dataType: 'text'
-        }).done(function(data){
-           //alert('Data sent');
-            $('#messages-success').text('Article successfully edited!!!');
-              $('form [name=title]').val(''),
-                 $('form [name=image]').val(''),
-                 $('form [name=content]').val('')
-        }).fail(function(jqXHR, error, message){
-//            alert(message);
-           alert('Data not sent');
-        }).always(function(){
-            
-        });
-    });
-});
-
-
-//$(document).ready(function() {
-//    $("#save").click(function() {
-//        $.ajaxSetup({
-//            headers: {
-//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//            }
-//        });
-//        $.ajax({
-//            type: 'PUT',
-//            url: '{{ route('articles.update', ['article' => $article->id]) }}',
-//            data: {
-//              
-//                title: $('form [name=title]').val(),
-//                image: $('form [name=image]').val(),
-//                content: $('form [name=content]').val(),
-//               
-//            },
-//            dataType: 'text',
-//            success: function(data) {
-//               $('#messages-success').text('Article successfully edited!!!');
-//              $('form [name=title]').val(''),
-//                 $('form [name=image]').val(''),
-//                 $('form [name=content]').val('')
-//               // console.log('Data sent');
-//            },
-//            error: function(data) {
-//                 alert('Data not sent');
-//               
-//        });
-//    });
-//});
+   
 </script>
 @endsection
 

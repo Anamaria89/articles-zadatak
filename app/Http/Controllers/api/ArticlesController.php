@@ -23,15 +23,15 @@ class ArticlesController extends Controller
     
     public function create()
     {
-
+        
         return view('articles.create');
     }
     
     public function store()
     {
-        
+        //dd($request->all());
          $data = request()->validate([
-           
+            
             'title' => 'required|string|max:191',
             'image' => 'required|image|mimes:jpeg,bmp,png,jpg',
             'content' => 'required',
@@ -57,35 +57,23 @@ class ArticlesController extends Controller
         
        $data['image'] = request()->image;
       
-        Auth::user()->articles()->create( [
+        
+        
+      Auth::user()->articles()->create([
+            
             'title' => $data['title'],
             'content' => $data['content'],
-            'image' => $data['image']
+            'image' => $data['image'],
+            
         ]);
         
         
-       $message = [
-           'type' => 'success',
-            'message' => 'Uspesno obrisan artikal'
-       ];
+        //return response()->json($data);
         
-        if(request()->ajax()) {
-            if( Auth::user()->articles()->create( [
-            'title' => $data['title'],
-            'content' => $data['content'],
-            'image' => $data['image']
-        ])){
-              
-       $message = [
-           'type' => 'success',
-            'message' => 'Uspesno obrisan artikal'
-       ];    
-            }
-        } 
-        return response()->json($message);
+        //return response()->json($message);
          
 //        return response()->json(['success'=>'Data is successfully added']);
-         //return redirect()->route('articles.index');
+           return redirect()->route('articles.index');
         }
         
    public function user(User $user)
@@ -138,10 +126,7 @@ class ArticlesController extends Controller
         
         $row->save();
        
-      $response = [
-          'status' => 'success',
-            'msg' => 'Setting created successfully'
-          ];
+    
         return Response::json($response);
         
         

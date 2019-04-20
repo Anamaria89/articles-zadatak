@@ -6,7 +6,7 @@
 
 @section('custom-css')
 <!-- Custom styles for this page -->
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
   #messages-success {
       color: darkred;
@@ -28,7 +28,7 @@
             
             <div class="form-group">
                 <label >Title</label>
-                <input type="text" name='title' value='{{ old("title") }}' class="form-control">
+                <input type="text" name='title' id="title" value='{{ old("title") }}' class="form-control">
                 @if($errors->has('title'))
                 <div class='text text-danger'>
                     This field is required.
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                         <label>Image </label>
-                        <input type="file" name='image' class="">
+                        <input type="file" id="image" name='image' class="">
                         @if($errors->has('image'))
                         <div class='text text-danger'>
                             {{ $errors->first('image') }}
@@ -68,36 +68,6 @@
 <script type="text/javascript">
    
     
-$(document).ready(function() {
-    $('#save').on('click', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "{{ route('articles.store') }}",
-            type: 'post',
-            data: {
-                
-                'title': $('form [name=title]').val(),
-                'image': $('form [name=image]').val(),
-                'content': $('form [name=content]').val(),
-                '_token' : $('form [name=_token]').val()
-                
-            },
-            dataType: 'text'
-        }).done(function(data){
-           //alert('Data sent');
-            $('#messages-success').text('Article successfully created!!!');
-              $('form [name=title]').val(''),
-                 $('form [name=image]').val(''),
-                 $('form [name=content]').val('')
-        }).fail(function(jqXHR, error, message){
-//            alert(message);
-           alert('Data not sent');
-        }).always(function(){
-            
-        });
-    });
-});
-
 </script>
 @endsection
 

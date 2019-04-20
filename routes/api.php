@@ -29,7 +29,15 @@ Route::get('/articles', function () {
             return new ArticleCollection(Article::all());
 });
 
-Route::get('/article/{article}/delete', 'api\ArticlesController@delete')->name('api.article.delete');
-
-
+Route::any('/login', 'UsersController@login')->name('login');
+//Route::get('/register', 'UsersController@create')->name('createuser');
+//Route::post('/register', 'UsersController@register')->name('register');
+Route::any('/logout', 'UsersController@logout')->name('logout');
+//Route::post('/articles', 'ArticlesController@index')->name('articles.index');
+Route::get('/articles/create', 'api\ArticlesController@create')->name('api.articles.create');
+Route::post('/articles/store', 'api\ArticlesController@store')->name('api.articles.store');
+Route::get('/articles/{article}', 'api\ArticlesController@show')->name('api.articles.show');
+Route::get('/articles/{article}/edit', 'api\ArticlesController@edit')->name('api.articles.edit');
+Route::post('/articles/{article}/edit', 'api\ArticlesController@update')->name('api.articles.update');
+Route::get('/articles/{article}/delete', 'api\ArticlesController@delete')->name('api.articles.delete');
 //Route::get('/articles', 'ArticlesController@index')->name('articles.index');

@@ -23,8 +23,11 @@ class ArticlesController extends Controller
          if(request()->isMethod('get')){
              
              $rows = Article::paginate(5);
-             
-           return view('articles.index', compact('rows', 'article'));
+           
+//             $html = view('articles.index')->with(compact('article', 'rows'))->render();
+//             
+//             return response()->json(['success' => true, 'html' => $html]);
+          return view('articles.index', compact('rows', 'article'));
          }
          
          if(request()->isMethod('post')){
@@ -53,10 +56,11 @@ class ArticlesController extends Controller
     public function store()
     {
          $data = request()->validate([
-           
+            
             'title' => 'required|string|max:191',
             'image' => 'required|image|mimes:jpeg,bmp,png,jpg',
             'content' => 'required',
+            
         ]);
         
          if(request()->has('image')){
@@ -83,16 +87,16 @@ class ArticlesController extends Controller
             'title' => $data['title'],
             'content' => $data['content'],
             'image' => $data['image'],
-            'message' => 'Data created'
+            
         ]);
-        
-        
-        
-        
-        return response()->json();
-    
-    
+       
+           
+//             
+       //return response()->json();
+              return redirect()->route('articles.index');
          }
+    
+         
         
    public function user(User $user)
     {
@@ -143,8 +147,8 @@ class ArticlesController extends Controller
         }
         
         $row->save();
-        
-          return response()->json();
+         return redirect()->route('articles.index');
+// return response()->json();
         
         
     }
